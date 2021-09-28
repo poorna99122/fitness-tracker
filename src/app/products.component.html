@@ -1,9 +1,10 @@
 <h1>My Products</h1>
 <!-- Two way binding  -->
-<input type="text" [(ngModel)]= "productName">
+<input *ngIf=" !isDisabled " type="text" [(ngModel)]= "productName" >
+
 <!-- Event Binding and property binding  -->
-<button (click) = "productName = 'A tree'" [disabled] ="isDisabled" >Change Name</button>
-<!-- String Interpolation -->
-<div>{{ productName }}</div>
+<button *ngIf=" !isDisabled " (click) = "onAddProduct()" >Add a product</button>
+<!-- String Interpolation ,structural directives -->
+<div *ngFor="let product of products">{{ product }}</div>
 
 

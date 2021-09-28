@@ -10,22 +10,21 @@ import { disableDebugTools } from "@angular/platform-browser";
 export class ProductsComponent {
     productName : any = "Book" ;
     isDisabled : any = true ;
+    products = ['A book','A tree'];
 
     constructor(){
-        // setTimeout(() => {
-        //     this.productName = "tree";
-        // }, 3000);
-
-
+    
           setTimeout(() => {
             this.isDisabled = false;
         }, 3000);
 
-       
-
-
-       
     }
+
+
+    onAddProduct() {
+        this.products.push(this.productName);
+    }
+   
 
 
   
