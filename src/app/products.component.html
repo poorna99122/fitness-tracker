@@ -5,6 +5,8 @@
 <!-- Event Binding and property binding  -->
 <button *ngIf=" !isDisabled " (click) = "onAddProduct()" >Add a product</button>
 <!-- String Interpolation ,structural directives -->
-<div *ngFor="let product of products">{{ product }}</div>
+<!-- <div *ngFor="let product of products">{{ product }}</div> -->
+
+<app-product (productClicked)="onRemoveProduct(product)" *ngFor="let product of products" [productName]="product"></app-product>
 
 

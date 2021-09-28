@@ -8,7 +8,7 @@ import { disableDebugTools } from "@angular/platform-browser";
     templateUrl : './products.component.html'
 })
 export class ProductsComponent {
-    productName : any = "Book" ;
+    productName : any = "book" ;
     isDisabled : any = true ;
     products = ['A book','A tree'];
 
@@ -23,6 +23,10 @@ export class ProductsComponent {
 
     onAddProduct() {
         this.products.push(this.productName);
+    }
+
+    onRemoveProduct(productName : string){
+        this.products = this.products.filter(p => p !== productName);
     }
    
 
