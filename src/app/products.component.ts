@@ -21,8 +21,13 @@ export class ProductsComponent {
     }
 
 
-    onAddProduct() {
-        this.products.push(this.productName);
+    onAddProduct(form: any) {
+        // this.products.push(this.productName);
+        // console.log(form);
+        if(form.valid){
+            this.products.push(form.value.productName);
+            console.log(this.products);
+        }
     }
 
     onRemoveProduct(productName : string){
