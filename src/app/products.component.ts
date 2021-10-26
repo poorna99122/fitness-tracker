@@ -1,5 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { disableDebugTools } from "@angular/platform-browser";
+import { ProductService } from "./products.service";
+import { Subscription } from "rxjs";
 
 
 
@@ -7,17 +9,29 @@ import { disableDebugTools } from "@angular/platform-browser";
     selector : 'app-products',
     templateUrl : './products.component.html'
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit, OnDestroy {
     productName : any = "book" ;
     isDisabled : any = true ;
-    products = ['A book','A tree'];
+    products = [''];
+    private productSubscribtion : Subscription | undefined ;
 
-    constructor(){
+    constructor(private x : ProductService){
     
           setTimeout(() => {
             this.isDisabled = false;
+
         }, 3000);
 
+    }
+    ngOnDestroy(): void {
+        this.productSubscribtion?.unsubscribe();
+    }
+    ngOnInit(){
+        this.products = this.x.getProducts();
+        this.productSubscribtion = this.x.productsUpdated.subscribe(()=>{
+            this.products = this.x.getProducts();
+        });
+        
     }
 
 
@@ -25,8 +39,9 @@ export class ProductsComponent {
         // this.products.push(this.productName);
         // console.log(form);
         if(form.valid){
-            this.products.push(form.value.productName);
-            console.log(this.products);
+            // this.products.push(form.value.productName);
+            // console.log(this.products);
+            this.x.addProduct(form.value.productName);
         }
     }
 
